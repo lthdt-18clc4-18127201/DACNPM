@@ -248,7 +248,7 @@ img.large {
 }
 
 /* Form */
-.from {
+.form {
   max-width: 60rem;
   margin: 0 auto;
 }
@@ -261,7 +261,6 @@ img.large {
 
 .form label {
   margin: 1rem 0;
-  display: block;
 }
 
 /* Dropdown */

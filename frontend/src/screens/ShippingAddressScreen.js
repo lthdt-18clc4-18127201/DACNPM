@@ -24,7 +24,7 @@ export default function ShippingScreen() {
     const submitHandler = (e) => {
         e.preventDefault();
         dispatch(saveShippingAddress({ fullName, address, city, postalCode, country }));
-        navigate('/payment')
+        navigate('/payment');
     }
 
     useEffect(() => {
