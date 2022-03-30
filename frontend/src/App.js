@@ -10,6 +10,7 @@ import { AiFillCaretDown } from 'react-icons/ai'
 import RegisterScreen from './screens/RegisterScreen';
 import ShippingAddressScreen from './screens/ShippingAddressScreen';
 import PaymentScreen from './screens/PaymentScreen';
+import OrderScreen from './screens/OrderScreen';
 
 function App() {
 
@@ -69,6 +70,7 @@ function App() {
             <Route path="/register" element={<RegisterScreen />} />
             <Route path="/shipping" element={<ShippingAddressScreen />} />
             <Route path="/payment" element={<PaymentScreen />} />
+            <Route path="/order" element={<OrderScreen />} />
             <Route path="/" element={<HomeScreen />} />
            </Routes>
         </main>

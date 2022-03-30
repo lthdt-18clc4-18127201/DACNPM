@@ -182,8 +182,8 @@ img.large {
 
 /* card */
 .card {
-  width: 228px;
-  height: 368px;
+  /* width: 228px;
+  height: 368px; */
   border: 0.1rem #c0c0c0 solid;
   background-color: #f8f8f8;
   border-radius: 0.5rem;
