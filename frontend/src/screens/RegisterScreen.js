@@ -13,9 +13,7 @@ export default function RegisterScreen() {
 
     const navigate = useNavigate();
     const location = useLocation();
-    const redirect = location.search
-        ? location.search.split('=')[1]
-        : '/';
+    const redirect = location.search.split('=')[1];
 
     const userRegister = useSelector(state => state.userRegister);
     const { userInfo, loading, error } = userRegister;
@@ -33,7 +31,10 @@ export default function RegisterScreen() {
 
     useEffect(() => {
         if(userInfo) {
-            navigate(`/${redirect}`);
+            if(redirect)
+                navigate(`/${redirect}`);
+            else
+                navigate('/')
         }
     }, [navigate, userInfo, redirect]);
 

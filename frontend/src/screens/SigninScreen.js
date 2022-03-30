@@ -1,19 +1,17 @@
 import React, { useEffect, useState } from 'react'
-import { Link, useLocation, useNavigate } from 'react-router-dom'
+import { Link, useLocation, useNavigate, } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { signin } from '../actions/userActions'
 import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
 
-export default function SigninScreen() {
+export default function SigninScreen(props) {
     const [ email, setEmail ] = useState('');
     const [ password, setPassword ] = useState('');
 
     const navigate = useNavigate();
     const location = useLocation();
-    const redirect = location.search
-        ? location.search.split('=')[1]
-        : '/';
+    const redirect = location.search.split('=')[1];
 
     const userSignin = useSelector(state => state.userSignin);
     const { userInfo, loading, error } = userSignin;
@@ -23,10 +21,14 @@ export default function SigninScreen() {
         e.preventDefault();
         dispatch(signin(email, password));
     }
+    console.log(redirect);
 
     useEffect(() => {
         if(userInfo) {
-            navigate(`/${redirect}`);
+            if(redirect)
+                navigate(`/${redirect}`);
+            else
+                navigate('/')
         }
     }, [navigate, userInfo, redirect]);
 

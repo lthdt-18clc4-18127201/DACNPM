@@ -8,6 +8,7 @@ import ProductScreen from './screens/ProductScreen'
 import SigninScreen from './screens/SigninScreen';
 import { AiFillCaretDown } from 'react-icons/ai'
 import RegisterScreen from './screens/RegisterScreen';
+import ShippingAddressScreen from './screens/ShippingAddressScreen';
 
 function App() {
 
@@ -50,10 +51,12 @@ function App() {
                       </ul>
                     </div>
                   ) : (
-                    <Link to="/signin">Sign in</Link>
+                    <>
+                      <Link to="/signin">Sign in</Link>
+                      <Link to="/register">Register</Link>
+                    </>
                   )
                 }
-                <Link to="/register">Register</Link>
             </div>
         </header>
         <main>
@@ -63,6 +66,7 @@ function App() {
             <Route path="/product/:id" element={<ProductScreen />} />
             <Route path="/signin" element={<SigninScreen />} />
             <Route path="/register" element={<RegisterScreen />} />
+            <Route path="/shipping" element={<ShippingAddressScreen />} />
             <Route path="/" element={<HomeScreen />} />
            </Routes>
         </main>
