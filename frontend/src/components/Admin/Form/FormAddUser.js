@@ -66,7 +66,14 @@ const FormAddUser = () => {
             required: true,
             message: 'Please input your username!',
           },
-          { min: 5, message: 'Username must be minimum 5 characters.' }
+          { min: 5, message: 'Username must be minimum 5 characters.' },
+          {
+            pattern: new RegExp(/^[a-zA-Z@~`!@#$%^&*()_=+\\\\';:\"\\/?>.<,-]+$/i),
+            message: "Field does not accept numbers"
+          },
+          
+
+
         ]}
       >
         <Input />
@@ -77,8 +84,15 @@ const FormAddUser = () => {
         rules={[
           {
             required: true,
-            message: 'Please input your username!',
+            message: 'Please input your email!',
+            
           },
+          {
+            type:"email",
+                message:
+                    'Enter a valid email address!',
+          }
+
         ]}
       >
         <Input />
@@ -96,7 +110,29 @@ const FormAddUser = () => {
       >
         <Input.Password />
       </Form.Item>
-     
+      <Form.Item
+        name="confirm"
+        label="Confirm Password"
+        dependencies={['password']}
+        hasFeedback
+        rules={[
+          {
+            required: true,
+            message: 'Please confirm your password!',
+          },
+          ({ getFieldValue }) => ({
+            validator(_, value) {
+              if (!value || getFieldValue('password') === value) {
+                return Promise.resolve();
+              }
+              return Promise.reject(new Error('The two passwords that you entered do not match!'));
+            },
+          }),
+          
+        ]}
+      >
+        <Input.Password />
+      </Form.Item>
      
 
       <Form.Item
@@ -106,7 +142,7 @@ const FormAddUser = () => {
         }}
       >
         <Button type="primary" htmlType="submit">
-          Add
+          Add New User
         </Button>
       </Form.Item>
     </Form>

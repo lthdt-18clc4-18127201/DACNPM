@@ -49,6 +49,15 @@ export default function AdminLoginPage() {
           },
         });
       }
+    }).catch(e=>{
+      notification.open({
+        message: 'Notification',
+        description:
+          e.message,
+        onClick: () => {
+          console.log('Notification Clicked!');
+        },
+      });
     })
 
     
@@ -81,6 +90,7 @@ export default function AdminLoginPage() {
               name="email"
               rules={[
                 { required: true, message: "Please input your username!" },
+               
               ]}
             >
               <Input />
