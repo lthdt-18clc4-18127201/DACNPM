@@ -8,7 +8,7 @@ export const register = (username, email, password) => async (dispatch) => {
     });
     try {
         const {data} = await Axios.post(
-            'api/users/register', 
+            'api/users/register',
             {username, email, password}
         );
         dispatch({

@@ -4,13 +4,14 @@ import expressAsyncHandler from 'express-async-handler';
 import bcrypt from 'bcryptjs';
 import User from '../models/User.js';
 import { generateToken } from '../utils.js'
+import userRepo from '../repositories/userRepo.js';
+import userService from '../services/userServices.js';
 const userRouter = express.Router();
 
 userRouter.get(
     '/seed', 
     expressAsyncHandler(async (req, res) => {
-        await User.remove({});
-        const createdUsers = await User.insertMany(data.users)
+        const createdUsers = await userRepo.insertUserSeed();
         res.send({createdUsers});
     })
 )
@@ -18,14 +19,15 @@ userRouter.get(
 userRouter.post(
     '/signin',
     expressAsyncHandler(async(req,res) => {
-        const user = await User.findOne({email: req.body.email});
+        const user = await userRepo.findUser(req.body.email);
         if(user){
-            if(bcrypt.compareSync(req.body.password, user.password)) {
+            if(userService.checkPassword(req.body.password, user.password)) {
                 res.send({
                     _id: user._id,
                     username: user.username,
                     email: user.email,
                     isAdmin: user.isAdmin,
+                    isSuperAdmin: user.isSuperAdmin,
                     token: generateToken(user)
                 })
             }
@@ -37,19 +39,23 @@ userRouter.post(
 userRouter.post(
     '/register',
     expressAsyncHandler(async(req,res) => {
-        const user = new User({
-            username: req.body.username,
-            email: req.body.email,
-            password: bcrypt.hashSync(req.body.password, 8),
-        });
-        const createdUser = await user.save();
+        const createdUser = userRepo.register(req.body);
         res.send({
             _id: createdUser._id,
             username: createdUser.username,
             email: createdUser.email,
             isAdmin: createdUser.isAdmin,
+            isSuperAdmin: createdUser.isSuperAdmin,
             token: generateToken(createdUser),
         });
+    })
+);
+
+userRouter.get(
+    '/',
+    expressAsyncHandler(async(req,res) => {
+        const users = await User.find({});
+        res.send(users);
     })
 );
 

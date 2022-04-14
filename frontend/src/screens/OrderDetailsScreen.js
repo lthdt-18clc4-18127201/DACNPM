@@ -1,43 +1,26 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { Link, useNavigate } from 'react-router-dom';
-import { createOrder } from '../actions/orderAction';
-import CheckoutSteps from '../components/CheckoutSteps'
+import { Link, useParams } from 'react-router-dom';
+import { detailsOrder } from '../actions/orderAction';
 import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
-import { ORDER_CREATE_RESET } from '../constants/orderConstants';
 
-export default function OrderScreen() {
-    const navigate = useNavigate();
+export default function OrderDetailsScreen() {
     const dispatch = useDispatch();
-    const cart = useSelector(state => state.cart);
-    const orderCreate = useSelector(state => state.orderCreate);
+    const { id } = useParams(); 
+    const orderDetails = useSelector(state => state.orderDetails);
+    const { loading, error, order } = orderDetails;
 
-    const {loading, error, success, order } = orderCreate;
+    console.log('order: ', order);
 
-    const toPrice = (num) => Number(num.toFixed(2));
-    cart.itemsPrice = toPrice(cart.cartItems.reduce((a, c) => a + c.qty * c.price, 0));
-    cart.shippingPrice = cart.itemsPrice > 100 ? toPrice(0) : toPrice(100);
-    cart.taxPrice = toPrice(0.15 * cart.itemsPrice);
-    cart.totalPrice = cart.itemsPrice + cart.shippingPrice + cart.taxPrice;
-
-    const orderHandler = (e) => {
-        e.preventDefault();
-        dispatch(createOrder({...cart, orderItems: cart.cartItems}));
-    }
-    
     useEffect(() => {
-        if(!cart.paymentMethod) {
-            navigate('/payment');
-        }
-        if(success) {
-            navigate(`/orders/${order._id}`);
-            dispatch({type: ORDER_CREATE_RESET})
-        }
-    }, [navigate, dispatch, cart.paymentMethod, success, order]);
-    return (
+        dispatch(detailsOrder(id))
+    }, [dispatch, id]);
+    return  loading ? (<LoadingBox/>)
+    : error ? (<MessageBox variant="danger">{error}</MessageBox>)
+    :(
     <div>
-        <CheckoutSteps step1 step2 step3 step4/>
+        <h1><strong>Oder: {order._id}</strong></h1>
         <div className="row top">
             <div className="col-2">
                 <ul>
@@ -45,11 +28,11 @@ export default function OrderScreen() {
                         <div className="card card-body">
                             <h2>Shipping</h2>
                             <p>
-                                <strong>Name: </strong>{cart.shippingAddress.fullName} <br/>
+                                <strong>Name: </strong>{order.shippingAddress.fullName} <br/>
                                 <strong>Address: </strong>
-                                    {cart.shippingAddress.address},
-                                    {cart.shippingAddress.city},
-                                    {cart.shippingAddress.country}
+                                    {order.shippingAddress.address},
+                                    {order.shippingAddress.city},
+                                    {order.shippingAddress.country}
                             </p>
                         </div>
                     </li>
@@ -57,7 +40,7 @@ export default function OrderScreen() {
                         <div className="card card-body">
                             <h2>Payment</h2>
                             <p>
-                                <strong>Method: </strong>{cart.paymentMethod}
+                                <strong>Method: </strong>{order.paymentMethod}
                             </p>
                         </div>
                     </li>
@@ -65,7 +48,7 @@ export default function OrderScreen() {
                         <div className="card card-body">
                             <h2>Order Items</h2>
                             <ul>
-                                {cart.cartItems.map((item) => (
+                                {order.orderItems.map((item) => (
                                 <li key={item.product}>
                                     <div className="row">
                                     <div>
@@ -96,39 +79,27 @@ export default function OrderScreen() {
                         <li>
                             <div className="row">
                                 <div>Items</div>
-                                <div>${cart.itemsPrice}</div>
+                                <div>${order.itemsPrice}</div>
                             </div>
                         </li>
                         <li>
                             <div className="row">
                                 <div>Shipping</div>
-                                <div>${cart.shippingPrice.toFixed(2)}</div>
+                                <div>${order.shippingPrice}</div>
                             </div>
                         </li>
                         <li>
                             <div className="row">
                                 <div>Tax</div>
-                                <div>${cart.taxPrice.toFixed(2)}</div>
+                                <div>${order.taxPrice}</div>
                             </div>
                         </li>
                         <li>
                             <div className="row">
                                 <div><strong>Order Totals</strong></div>
-                                <div><strong>${cart.totalPrice.toFixed(2)}</strong></div>
+                                <div><strong>${order.totalPrice}</strong></div>
                             </div>
                         </li>
-                        <li>
-                            <button 
-                                type="button" 
-                                onClick={orderHandler} 
-                                className="primary block" 
-                                disabled={cart.cartItems.length === 0}
-                            >
-                                Place Order
-                            </button>
-                        </li>
-                        {loading && <LoadingBox />}
-                        {error && <MessageBox variant="danger">{error}</MessageBox>}
                     </ul>
                 </div>
             </div>

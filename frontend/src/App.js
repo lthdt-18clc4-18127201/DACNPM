@@ -11,6 +11,7 @@ import RegisterScreen from './screens/RegisterScreen';
 import ShippingAddressScreen from './screens/ShippingAddressScreen';
 import PaymentScreen from './screens/PaymentScreen';
 import OrderScreen from './screens/OrderScreen';
+import OrderDetailsScreen from './screens/OrderDetailsScreen';
 
 function App() {
 
@@ -23,7 +24,6 @@ function App() {
   const signoutHandler = () => {
     dispatch(signout());
   }
-
   return (
       <div className="grid-container">
         <header className="row">
@@ -70,7 +70,8 @@ function App() {
             <Route path="/register" element={<RegisterScreen />} />
             <Route path="/shipping" element={<ShippingAddressScreen />} />
             <Route path="/payment" element={<PaymentScreen />} />
-            <Route path="/order" element={<OrderScreen />} />
+            <Route path="/orders" element={<OrderScreen />} />
+            <Route path="/orders/:id" element={<OrderDetailsScreen />} />
             <Route path="/" element={<HomeScreen />} />
            </Routes>
         </main>

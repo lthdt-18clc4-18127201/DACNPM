@@ -16,7 +16,7 @@ export default function PaymentScreen() {
     const submitHandler = (e) => {
         e.preventDefault();
         dispatch(savePaymentMethod(paymentMethod));
-        navigate('/order');
+        navigate('/orders');
     }
 
     useEffect(() => {
