@@ -56,7 +56,7 @@ userRouter.post(
 userRouter.get(
     '/',
     expressAsyncHandler(async(req,res) => {
-        const users = await userRepo.getApiUser();
+        const users = await User.find();
         res.send(users);
     })
 );
