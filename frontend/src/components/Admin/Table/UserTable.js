@@ -1,70 +1,178 @@
 import React from "react";
-import { useReducer, useEffect,useState } from "react";
-import { Tabs,Button,Modal } from "antd";
+import { useEffect, useState } from "react";
+import { Tabs, Button, Modal, Form, Input,Select } from "antd";
 import UserView from "./UserView/UserView";
 import UserBlockView from "./UserView/UserBlockView";
 import PageHeader from "../PageHeader/PageHeader";
-import FormAddUser from "../Form/FormAddUser";
-import appContext from "../../../store/adminstore";
-// import PageHeader from "../../component/PageHeader/PageHeader";
 
-// import  reducer, {userState} from '../../reducer/UserReducer'
-// import UserContext from "../../context/UserContext"
-// import { instance } from "../../ultils/ultils";
+import { useDispatch, useSelector } from "react-redux";
+import { createUser } from "../../../actions/adminActions";
+import { listUser } from "../../../actions/adminActions";
 const { TabPane } = Tabs;
-const tableinfos = [
-  {
-    title: "Tất cả người dùng",
-    value: "all",
-  },
-  {
-    title: "Seller",
-    value: "seller",
-  },
-];
+const { Option } = Select;
 export default function UserTable() {
- 
-
-  // const [store, dispatch] = useReducer(reducer, userState);
-  // useEffect(() => {
-  //   async function fetchData() {
-  //     // You can await here
-  //     const product_res = await instance.get("/users");
-     
-  //     const productsRes = product_res.data;
-   
-      
-  //     dispatch({
-  //       type: "init",
-  //       payload: {
-  //         items: productsRes,
-  //         query: "",
-  //       },
-  //     });
-  //   }
-  //   fetchData();
-  // }, []);
+  const dispatch = useDispatch();
+  const userCreate = useSelector((state) => state.userCreate);
+  const usersList =useSelector((state) => state.usersList);
+  const { users } = usersList;
+  const { user, success } = userCreate;
   const [isModalVisible, setIsModalVisible] = useState(false);
-
   const showModal = () => {
     setIsModalVisible(true);
   };
 
-  const handleOk = () => {
-    setIsModalVisible(false);
-  };
+  
 
   const handleCancel = () => {
     setIsModalVisible(false);
   };
+  const onFinish = async (e) => {
+    const user = {
+      name: e.username,
+      email: e.email,
+      password: e.password,
+      isAdmin: e.isAdmin,
+    };
+    dispatch(createUser(user));
+  };
+  const componentSize="default";
+  const onFinishFailed = (errorInfo) => {
+    console.log("Failed:", errorInfo);
+  };
+  useEffect(() => {
+    if (success) {
+      setIsModalVisible(false);
+      dispatch(listUser())
+    }
+  }, []);
   return (
     <>
       <PageHeader title={"Quản lý người dùng"}></PageHeader>
-      <Button type="primary" onClick={showModal} style={{textAlign:"right"}}>
-        Thêm 1 khách hàng mới
+      <Button type="primary" onClick={showModal} style={{ textAlign: "right" }}>
+        Thêm 1 người dùng mới
       </Button>
-      <Modal title="Thêm mới 1 khách hàng" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
-        <FormAddUser></FormAddUser>
+      <Modal
+        title="Thêm mới 1 khách hàng"
+        visible={isModalVisible}
+        onCancel={handleCancel}
+      >
+        <Form
+          name="basic"
+          labelCol={{
+            span: 8,
+          }}
+          wrapperCol={{
+            span: 16,
+          }}
+          initialValues={{
+            size: componentSize,
+          }}
+          layout="horizontal"
+          onFinish={onFinish}
+          onFinishFailed={onFinishFailed}
+          autoComplete="off"
+        >
+          <Form.Item
+            label="Tên"
+            name="username"
+            rules={[
+              {
+                required: true,
+                message: "Please input your username!",
+              },
+              { min: 5, message: "Username must be minimum 5 characters." },
+              {
+                pattern: new RegExp(
+                  /^[a-zA-Z@~`!@#$%^&*()_=+\\\\';:\"\\/?>.<,-]+$/i
+                ),
+                message: "Field does not accept numbers",
+              },
+            ]}
+          >
+            <Input />
+          </Form.Item>
+          <Form.Item
+            label="Email"
+            name="email"
+            rules={[
+              {
+                required: true,
+                message: "Please input your email!",
+              },
+              {
+                type: "email",
+                message: "Enter a valid email address!",
+              },
+            ]}
+          >
+            <Input />
+          </Form.Item>
+
+          <Form.Item
+            label="Mật khẩu"
+            name="password"
+            rules={[
+              {
+                required: true,
+                message: "Please input your password!",
+              },
+            ]}
+          >
+            <Input.Password />
+          </Form.Item>
+          <Form.Item
+            name="confirm"
+            label="Nhập lại"
+            dependencies={["password"]}
+            hasFeedback
+            rules={[
+              {
+                required: true,
+                message: "Please confirm your password!",
+              },
+              ({ getFieldValue }) => ({
+                validator(_, value) {
+                  if (!value || getFieldValue("password") === value) {
+                    return Promise.resolve();
+                  }
+                  return Promise.reject(
+                    new Error(
+                      "The two passwords that you entered do not match!"
+                    )
+                  );
+                },
+              }),
+            ]}
+          >
+            <Input.Password />
+          </Form.Item>
+          <Form.Item
+            name="role"
+            label="Vai trò"
+            rules={[
+              {
+                required: true,
+                message: "Please select admin!",
+              },
+            ]}
+          >
+            <Select placeholder="select your gender">
+              <Option value={true}>Admin</Option>
+              <Option value={false}>User</Option>
+            </Select>
+          </Form.Item>
+
+          <Form.Item
+            wrapperCol={{
+              offset: 8,
+              span: 16,
+            }}
+          >
+            <Button type="primary" htmlType="submit">
+              Thêm mới
+            </Button>
+          </Form.Item>
+        </Form>
       </Modal>
       <Tabs defaultActiveKey="1">
         <TabPane tab="Người dùng" key="1">

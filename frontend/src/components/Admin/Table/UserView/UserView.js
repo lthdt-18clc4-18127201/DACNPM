@@ -1,17 +1,16 @@
-import React, { useState, useContext } from "react";
+import React, { useState,useEffect} from "react";
+import { useDispatch, useSelector } from 'react-redux'
 import { Table, Button, Drawer, Modal ,Descriptions,Badge} from "antd";
-
-import UserContext from "../../../../store/adminstore"
-const DescriptionItem = ({ title, content }) => (
-  <div className="site-description-item-profile-wrapper">
-    <p className="site-description-item-profile-p-label">{title}:</p>
-    {content}
-  </div>
-);
-
+import { listUser } from '../../../../actions/adminActions'
 export default function UserView() {
-  const { store } = useContext(UserContext);
-  const { items, query } = store;
+ 
+  const dispatch = useDispatch();
+  const userList = useSelector(state => state.usersList);
+  const { users } = userList;
+
+  useEffect(() => {
+    dispatch(listUser())
+  }, [dispatch])
   const [state, setState] = useState({
     user: {},
     iddelete:null
@@ -82,7 +81,7 @@ export default function UserView() {
   ];
   return (
     <>
-      <Table dataSource={items.filter(item=>{return item.isAdmin === false})} columns={columns} />
+      <Table dataSource={users} columns={columns} />
       <Drawer
         title="Thông tin khách hàng"
         placement="right"
@@ -98,7 +97,7 @@ export default function UserView() {
             <Badge status="processing" text="Activate" />
           </Descriptions.Item>
           <Descriptions.Item label="Type User">
-            {state.isAdmin==true ? "" : "Buyer User"}
+            
           </Descriptions.Item>
         
           <Descriptions.Item label="Config Info">

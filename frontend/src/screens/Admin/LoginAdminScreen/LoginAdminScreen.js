@@ -1,65 +1,38 @@
-import React , {useState} from "react";
+import React  from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import {
   Layout,
-  Menu,
-  Breadcrumb,
+ 
   Row,
   Col,
   Form,
   Input,
   Button,
-  Checkbox,
+
 } from "antd";
+import { useDispatch, useSelector } from 'react-redux'
+import { signin } from '../../../actions/adminActions'
 import { Image,Title } from "../admin.style";
-import { notification } from 'antd';
-import { instance } from "../../../ultils/ultils";
+
 import "antd/dist/antd.min.css";
-const { Header, Content, Footer, Sider } = Layout;
-const { SubMenu } = Menu;
+
 
 export default function AdminLoginPage() {
   const navigate = useNavigate();
   const location = useLocation();
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-
+  const adminSignin = useSelector(state => state.adminSignin);
+  const { adminInfo } = adminSignin;
+  
+  const dispatch = useDispatch();
   const onFinish = async (e) => {
-    const body = {
-      email:e.email,
-      password:e.password
-    }
-
-    await instance.post("/users/signin",body)
-    .then(res => {
-      if(res.status === 200){
-         if(res.data.isSuperAdmin == true) {
-          localStorage.accessToken = res.data.token;
-          const retUrl = location.state?.from?.pathname || "/dashboard/users";
+    
+ 
+    
+    dispatch(signin(e.email, e.password));
+    if(adminInfo) {
+      const retUrl = location.state?.from?.pathname || "/dashboard/users";
           navigate(retUrl);
-         }
-      }
-      else{
-        notification.open({
-          message: 'Notification',
-          description:
-            'This is the content of the notification. This is the content of the notification. This is the content of the notification.',
-          onClick: () => {
-            console.log('Notification Clicked!');
-          },
-        });
-      }
-    }).catch(e=>{
-      notification.open({
-        message: 'Notification',
-        description:
-          e.message,
-        onClick: () => {
-          console.log('Notification Clicked!');
-        },
-      });
-    })
-
+    }
     
   };
   const onFinishFailed = () => {

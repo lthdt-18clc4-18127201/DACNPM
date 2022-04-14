@@ -1,4 +1,4 @@
-import React, { useEffect, useReducer } from "react";
+import React from "react";
 import {
   Routes,
   Route,
@@ -8,35 +8,17 @@ import { Layout } from "antd";
 import Sidebar from "../../components/Admin/Sidebar/Sidebar";
 import AcceptTable from "../../components/Admin/Table/AcceptTable";
 import UserTable from "../../components/Admin/Table/UserTable";
-import reducer, { initialState } from "../../reducers/Admin/userReducers";
-import usersStore from "../../store/adminstore";
+
 import ReportScreen from "./ReportScreen/ReportScreen";
 import RevenueScreen from "./RevenueScreen/RevenueScreen";
-import { instance } from "../../ultils/ultils";
+
 const { Header, Footer, Sider, Content } = Layout;
 export default function Admin() {
   const navigate = useNavigate();
-  const [store, dispatch] = useReducer(reducer, initialState);
-  useEffect(() => {
-    async function fetchData() {
 
-      // You can await here
-      const res = await instance.get("/users/seed");
-      
-      const productsRes = res.data.createdUsers;
-      console.log(res);
-      dispatch({
-        type: "init_users",
-        payload: {
-          items: productsRes,
-          filter: "all",
-        },
-      });
-    }
-    fetchData();
-  }, []);
+  
   return (
-    <usersStore.Provider value={{ store, dispatch }}>
+ 
       <Layout className="" style={{ height: "100vh" }}>
         <Sider>
           <div
@@ -75,6 +57,6 @@ export default function Admin() {
           <Footer>Footer</Footer>
         </Layout>
       </Layout>
-    </usersStore.Provider>
+    
   );
 }
