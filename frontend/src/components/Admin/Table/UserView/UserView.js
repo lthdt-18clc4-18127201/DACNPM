@@ -98,7 +98,7 @@ export default function UserView() {
             <Badge status="processing" text="Activate" />
           </Descriptions.Item>
           <Descriptions.Item label="Type User">
-            {state.isAdmin==true ? "" : "Buyer User"}
+            {state.isAdmin===true ? "" : "Buyer User"}
           </Descriptions.Item>
         
           <Descriptions.Item label="Config Info">

@@ -34,6 +34,10 @@ export default function OrderDetailsScreen() {
                                     {order.shippingAddress.city},
                                     {order.shippingAddress.country}
                             </p>
+                            {order.isDelivered
+                                ? <MessageBox variant="success">Delivered at {order.deliveredAt}</MessageBox>
+                                : <MessageBox variant="danger">Not Delivered</MessageBox>
+                            }
                         </div>
                     </li>
                     <li>
@@ -42,6 +46,10 @@ export default function OrderDetailsScreen() {
                             <p>
                                 <strong>Method: </strong>{order.paymentMethod}
                             </p>
+                            {order.isPaid
+                                ? <MessageBox variant="success">Paid at {order.paidAt}</MessageBox>
+                                : <MessageBox variant="danger">Not Paid</MessageBox>
+                            }
                         </div>
                     </li>
                     <li>

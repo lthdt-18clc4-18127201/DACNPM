@@ -1,6 +1,6 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Routes, Route, Link ,useLocation ,Navigate} from "react-router-dom";
+import { Routes, Route, Link ,useLocation ,Navigate } from "react-router-dom";
 import { signout } from "./actions/userActions";
 import CartScreen from "./screens/CartScreen";
 import HomeScreen from "./screens/HomeScreen";
@@ -11,12 +11,11 @@ import RegisterScreen from "./screens/RegisterScreen";
 import ShippingAddressScreen from "./screens/ShippingAddressScreen";
 import PaymentScreen from "./screens/PaymentScreen";
 import OrderScreen from "./screens/OrderScreen";
+import OrderDetailsScreen from "./screens/OrderDetailsScreen";
 import Admin from "./screens/Admin/Admin";
 import AdminLoginPage from "./screens/Admin/LoginAdminScreen/LoginAdminScreen";
 
 function App() {
-  
-
   return (
     <>
        <Routes>
@@ -55,24 +54,29 @@ function UserApp() {
               <span className="badge">{cartItems.length}</span>
             )}
           </Link>
-          {userInfo ? (
-            <div className="dropdown">
-              <Link to="#">
-                {userInfo.username}
-                <AiFillCaretDown className="icon" />
-              </Link>
-              <ul className="dropdown-content">
-                <Link to="#signout" onClick={signoutHandler}>
-                  Sign out
+          {
+            userInfo ? (
+              <div className="dropdown">
+                <Link to="#">
+                  {userInfo.username}
+                  <AiFillCaretDown className="icon"/>
                 </Link>
-              </ul>
-            </div>
-          ) : (
-            <>
-              <Link to="/signin">Sign in</Link>
-              <Link to="/register">Register</Link>
-            </>
-          )}
+                <ul className="dropdown-content">
+                  <Link 
+                    to="#signout" 
+                    onClick={signoutHandler}
+                  >
+                    Sign out
+                  </Link>
+                </ul>
+              </div>
+            ) : (
+              <>
+                <Link to="/signin">Sign in</Link>
+                <Link to="/register">Register</Link>
+              </>
+            )
+          }
         </div>
       </header>
       <main>
@@ -84,11 +88,9 @@ function UserApp() {
           <Route path="/register" element={<RegisterScreen />} />
           <Route path="/shipping" element={<ShippingAddressScreen />} />
           <Route path="/payment" element={<PaymentScreen />} />
-          <Route path="/order" element={<OrderScreen />} />
-          <Route path="/dashboard/login" element={<OrderScreen />} />
+          <Route path="/orders" element={<OrderScreen />} />
+          <Route path="/orders/:id" element={<OrderDetailsScreen />} />
           <Route path="/" element={<HomeScreen />} />
-
-          
         </Routes>
       </main>
 

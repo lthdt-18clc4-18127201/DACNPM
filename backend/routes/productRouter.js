@@ -1,21 +1,20 @@
 import express from 'express';
-import data from '../data.js'
-import Product from '../models/Product.js'
-import expressAsyncHandler from 'express-async-handler'
+import Product from '../models/Product.js';
+import expressAsyncHandler from 'express-async-handler';
+import productRepo from '../repositories/productRepo.js';
 const productRouter = express.Router();
 
 productRouter.get(
     '/seed', 
     expressAsyncHandler(async(req, res) => {
-        //await Product.remove({});
-        const createProduct = await Product.insertMany(data.products);
+        const createProduct = await productRepo.insertProductSeed();
         res.send({product: createProduct});
 }))
 
 productRouter.get(
     '/:id', 
     expressAsyncHandler(async(req, res) => {
-        const product = await Product.findById(req.params.id);
+        const product = await productRepo.findById(req.params.id)
         if(product){
            res.send(product);
         }
@@ -28,7 +27,7 @@ productRouter.get(
 productRouter.get(
     '/', 
     expressAsyncHandler(async(req, res) => {
-        const products = await Product.find({});
+        const products = await productRepo.getApiProduct();
         res.send(products);
 }))
 

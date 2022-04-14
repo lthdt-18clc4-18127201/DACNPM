@@ -21,15 +21,14 @@ export default function Admin() {
     async function fetchData() {
 
       // You can await here
-      const res = await instance.get("/users/seed");
+      const res = await instance.get("/users");
       
-      const productsRes = res.data.createdUsers;
-      console.log(res);
+      const productsRes = res.data.users;
+      console.log(res.data);
       dispatch({
         type: "init_users",
         payload: {
           items: productsRes,
-          filter: "all",
         },
       });
     }

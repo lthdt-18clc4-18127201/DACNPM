@@ -5,6 +5,7 @@ export const instance = axios.create({
   timeout: 30000,
   // headers: { 'X-Access-Token': 'accessToken' }
 });
+
 export function parseJwt(token) {
   const base64Url = token.split('.')[1];
   const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
