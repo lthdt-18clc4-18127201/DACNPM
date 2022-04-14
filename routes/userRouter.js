@@ -53,4 +53,13 @@ userRouter.post(
     })
 );
 
+userRouter.get(
+    '/',
+    expressAsyncHandler(async(req,res) => {
+        const users = await userRepo.getApiUser();
+        res.send(users);
+    })
+);
+
+
 export default userRouter;
