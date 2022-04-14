@@ -30,6 +30,7 @@ export default function AdminPage() {
             className="site-layout-background"
             style={{ padding: 24, minHeight: 360 }}
           >
+            
             <AcceptTable></AcceptTable>
           </div>
         </Content>

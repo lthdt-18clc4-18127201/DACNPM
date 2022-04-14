@@ -1,8 +1,10 @@
 import React, { useState } from "react";
-import { Table, Tag, Space, Drawer , Button} from "antd";
+import { Table, Tag, Space, Drawer , Button,Tabs} from "antd";
 import CustomerDescription from "../CustomerDescription/CustomerDescription";
 import PageHeader from "../PageHeader/PageHeader";
 import AdminStore from "../../../store/adminstore"
+import SellerView from "./SellerView/SellerView";
+const { TabPane } = Tabs;
 export default function AcceptTable() {
   const data = [
     {
@@ -53,7 +55,9 @@ export default function AcceptTable() {
          <Button type="primary" shape="round" size={"small"} onClick={showDrawer}>
           Xem thông tin
         </Button>
-         
+        <Button type="danger" shape="round" size={"small"} onClick={showDrawer}>
+          Xác nhận
+        </Button>
         <Button type="danger" shape="round" size={"small"} onClick={showDrawer}>
           Không xác nhận
         </Button>
@@ -70,8 +74,16 @@ export default function AcceptTable() {
   };
   return (
     <>
-    <PageHeader title="Duyệt khách hàng"/>
-      <Table columns={columns} dataSource={data} />
+    <PageHeader title="Quản lý khách bán"/>
+     <Tabs defaultActiveKey="1">
+        <TabPane tab="Duyệt người bán" key="1">
+            <SellerView></SellerView>
+        </TabPane>
+        <TabPane tab="Người bán hiện có" key="2">
+        <SellerView></SellerView>
+        </TabPane>
+      </Tabs>
+      
       <Drawer
         title="Thông tin người dùng"
         placement="right"
