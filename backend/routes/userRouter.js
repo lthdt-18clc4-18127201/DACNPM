@@ -4,14 +4,13 @@ import expressAsyncHandler from 'express-async-handler';
 import bcrypt from 'bcryptjs';
 import User from '../models/User.js';
 import { generateToken } from '../utils.js'
-import userRepo from '../repositories/userRepo.js';
-import userService from '../services/userServices.js';
 const userRouter = express.Router();
 
 userRouter.get(
     '/seed', 
     expressAsyncHandler(async (req, res) => {
-        const createdUsers = await userRepo.insertUserSeed();
+        await User.remove({});
+        const createdUsers = await User.insertMany(data.users)
         res.send({createdUsers});
     })
 )
@@ -19,9 +18,9 @@ userRouter.get(
 userRouter.post(
     '/signin',
     expressAsyncHandler(async(req,res) => {
-        const user = await userRepo.findUser(req.body.email);
+        const user = await User.findOne({email: req.body.email});
         if(user){
-            if(userService.checkPassword(req.body.password, user.password)) {
+            if(bcrypt.compareSync(req.body.password, user.password)) {
                 res.send({
                     _id: user._id,
                     username: user.username,
@@ -39,7 +38,7 @@ userRouter.post(
 userRouter.post(
     '/register',
     expressAsyncHandler(async(req,res) => {
-        const createdUser = userRepo.register(req.body);
+        const createdUser = user.register(req.body);
         res.send({
             _id: createdUser._id,
             username: createdUser.username,
