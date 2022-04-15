@@ -18,8 +18,6 @@ export default function ShippingScreen() {
     const [ city, setCity ] = useState(shippingAddress.city);
     const [ postalCode, setPostalCode ] = useState(shippingAddress.postalCode);
     const [ country, setCountry ] = useState(shippingAddress.country);
-    console.log(shippingAddress);
-
 
     const submitHandler = (e) => {
         e.preventDefault();
