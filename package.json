@@ -6,7 +6,8 @@
   "main": "server.js",
   "scripts": {
     "start": "nodemon --watch backend --exec node --experimental-modules backend/server.js",
-    "test": "jest"
+    "test": "jest",
+    "build": ""
   },
   "jest": {
     "testEnvironment": "node"
