@@ -1,7 +1,7 @@
 version: 2.1
 
 orbs:
-  node: circleci/node@16.14.0
+  node: circleci/node@5.0.2
 
 jobs:
   build:
@@ -10,7 +10,7 @@ jobs:
     steps:
       - checkout
       - node/install-packages:
-          pkg-manager: node
+          pkg-manager: yarn
       - run:
           name: Build app
           command: npm run build
@@ -29,5 +29,5 @@ workflows:
     jobs:
       - build
       - test:
-        requires:
-          - build
+          requires:
+            - build
