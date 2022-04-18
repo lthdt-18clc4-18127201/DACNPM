@@ -13,6 +13,7 @@ orderRouter.post(
     expressAsyncHandler(async(req, res) => {
         if(orderService.checkEmptyOrder(req.body.orderItems.length) == true) {
             res.status(400).send({message: 'Cart is empty'});
+            console.log(typeof(req.body.orderItems.length));
         } else {
             const createdOrder = await orderRepo.createOrder(req.body, req.user);
             res.status(201).send({

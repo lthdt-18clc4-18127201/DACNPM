@@ -7,4 +7,5 @@ function checkPassword(bodyPassword, password) {
     return false;
 }
 
+
 export default { checkPassword };
