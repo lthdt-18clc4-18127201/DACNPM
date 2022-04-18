@@ -1,0 +1,27 @@
+jobs:
+  build:
+    docker:
+      - image: cimg/node: currunt
+        auth:
+          username: 746539
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+    steps:
+      - checkout
+      - run: echo "this is the build job"
+  test:
+    docker:
+      - image: cimg/node: currunt
+        auth:
+          username: 746539
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+    steps:
+      - checkout
+      - run: echo "this is the test job"
+
+workflows:
+  build_and_test:
+    jobs:
+      - build
+      - test:
+        requires:
+          - build
