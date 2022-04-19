@@ -10,7 +10,7 @@ app.use(cors({
 }));
 const port = process.env.PORT || 5000;
 
-app.use(express.ijson());
+app.use(express.json());
 app.use(express.urlencoded({
     extended: true,
 }));
