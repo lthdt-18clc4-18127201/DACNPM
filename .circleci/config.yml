@@ -13,7 +13,7 @@ jobs:
           pkg-manager: yarn
       - run:
           name: Build app
-          command: npm start
+          command: npm run build
 
   test:
     docker:
