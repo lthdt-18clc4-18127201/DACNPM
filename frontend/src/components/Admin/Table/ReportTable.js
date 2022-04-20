@@ -4,7 +4,7 @@ import CustomerDescription from "../CustomerDescription/CustomerDescription";
 import PageHeader from "../PageHeader/PageHeader";
 
 export default function ReportsTable() {
-  const data = [{
+   let data = [{
     key: "1",
     name: "John Brown",
     report: "Pham meme kha dc",
@@ -22,6 +22,7 @@ export default function ReportsTable() {
     name: "Joe Black",
     report: "Pham meme kha dc",
   }];
+  
   const columns = [
     {
       title: "Tên",

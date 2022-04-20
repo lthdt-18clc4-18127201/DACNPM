@@ -1,13 +1,13 @@
-import React from "react";
-import { useEffect, useState } from "react";
+import React,{ useEffect, useState }  from "react";
+
 import { Tabs, Button, Modal, Form, Input,Select } from "antd";
 import UserView from "./UserView/UserView";
 
 import PageHeader from "../PageHeader/PageHeader";
 
 import { useDispatch, useSelector } from "react-redux";
-import { createUser } from "../../../actions/adminActions";
-import { listUser } from "../../../actions/adminActions";
+import { createUser, listUser  } from "../../../actions/adminActions";
+
 const { TabPane } = Tabs;
 const { Option } = Select;
 export default function UserTable() {

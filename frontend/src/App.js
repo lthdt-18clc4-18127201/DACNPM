@@ -13,7 +13,6 @@ import PaymentScreen from "./screens/PaymentScreen";
 import OrderScreen from "./screens/OrderScreen";
 import Admin from "./screens/Admin/Admin";
 import AdminLoginPage from "./screens/Admin/LoginAdminScreen/LoginAdminScreen";
-
 function App() {
   
 

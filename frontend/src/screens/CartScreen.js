@@ -5,7 +5,8 @@ import { useParams, useLocation, Link, useNavigate } from 'react-router-dom';
 import { addToCart, removeFromCart } from '../actions/cartActions';
 import MessageBox from '../components/MessageBox'
 
-export default function CartScreen(props) {
+export default function CartScreen() {
+
   const { id } = useParams();
   const location = useLocation();
   const navigate = useNavigate();

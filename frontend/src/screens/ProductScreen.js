@@ -6,7 +6,7 @@ import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
 import Rating from '../components/Rating'
 
-export default function ProductScreen(props) {
+export default function ProductScreen() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { id } = useParams();

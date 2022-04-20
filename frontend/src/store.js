@@ -4,7 +4,7 @@ import { cartReducer } from './reducers/cartReducers';
 import { createOrderReducer, orderDetailsReducer } from './reducers/orderReducers';
 import { productDetailsReducer, productListReducer } from './reducers/productReducers';
 import { userRegisterReducer, userSigninReducer } from './reducers/userReducers';
-import { adminSigninReducer,userlistReducer,createUserReducer } from './reducers/Admin/adminReducers';
+import { adminSigninReducer,userlistReducer } from './reducers/Admin/adminReducers';
 const initialState = {
     cart: {
         cartItems: localStorage.getItem('cartItems')
