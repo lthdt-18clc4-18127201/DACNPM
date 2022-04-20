@@ -2,7 +2,7 @@ import React from "react";
 import { useEffect, useState } from "react";
 import { Tabs, Button, Modal, Form, Input,Select } from "antd";
 import UserView from "./UserView/UserView";
-import UserBlockView from "./UserView/UserBlockView";
+
 import PageHeader from "../PageHeader/PageHeader";
 
 import { useDispatch, useSelector } from "react-redux";
@@ -13,9 +13,9 @@ const { Option } = Select;
 export default function UserTable() {
   const dispatch = useDispatch();
   const userCreate = useSelector((state) => state.userCreate);
-  const usersList =useSelector((state) => state.usersList);
-  const { users } = usersList;
-  const { user, success } = userCreate;
+  // const usersList =useSelector((state) => state.usersList);
+  // const { users } = usersList;
+  const { success } = userCreate;
   const [isModalVisible, setIsModalVisible] = useState(false);
   const showModal = () => {
     setIsModalVisible(true);
@@ -26,7 +26,7 @@ export default function UserTable() {
   const handleCancel = () => {
     setIsModalVisible(false);
   };
-  const onFinish = async (e) => {
+  const onFinish = (e) => {
     const user = {
       name: e.username,
       email: e.email,
@@ -83,7 +83,7 @@ export default function UserTable() {
               { min: 5, message: "Username must be minimum 5 characters." },
               {
                 pattern: new RegExp(
-                  /^[a-zA-Z@~`!@#$%^&*()_=+\\\\';:\"\\/?>.<,-]+$/i
+                  /^[a-zA-Z@~`!@#$%^&*()_=+\\\\';:\\"\\/?>.<,-]+$/i
                 ),
                 message: "Field does not accept numbers",
               },
@@ -179,7 +179,7 @@ export default function UserTable() {
           <UserView />
         </TabPane>
         <TabPane tab="Người dùng bị khóa" key="2">
-          <UserBlockView />
+          
         </TabPane>
       </Tabs>
     </>

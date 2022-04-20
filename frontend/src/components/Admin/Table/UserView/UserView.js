@@ -11,7 +11,7 @@ export default function UserView() {
   useEffect(() => {
     dispatch(listUser())
   }, [dispatch])
-  const [state, setState] = useState({
+  const [state] = useState({
     user: {},
     iddelete:null
   });
@@ -81,7 +81,7 @@ export default function UserView() {
   ];
   return (
     <>
-      <Table dataSource={users} columns={columns} />
+      <Table dataSource={users} columns={columns} pagination={{ defaultPageSize: 2, showSizeChanger: true}} />
       <Drawer
         title="Thông tin khách hàng"
         placement="right"

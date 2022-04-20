@@ -1,6 +1,6 @@
 import React from 'react';
 import { StickerWidgetWrapper } from './StickerWidget.styles';
-
+/* eslint-disable react/prop-types */
 export default function StickerWidget({ fontColor, bgColor, width, icon, number, text }) {
   const textColor = {
     color: fontColor,
@@ -9,9 +9,7 @@ export default function StickerWidget({ fontColor, bgColor, width, icon, number,
     backgroundColor: "#ffffff",
     width: width,padding: '8px 8px'
   };
-  const iconStyle = {
-    color: fontColor,
-  };
+ 
 
   return (
     <StickerWidgetWrapper className="isoStickerWidget" style={widgetStyle}>

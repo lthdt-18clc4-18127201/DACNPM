@@ -1,7 +1,7 @@
 import React from 'react';
 import { WidgetBox } from './Widget.style';
-
-export default function({ children, style, height, padding }) {
+/* eslint-disable react/prop-types */
+export default function WidgerBox({ children, style, height, padding }) {
   return (
     <WidgetBox
       className="isoWidgetBox"

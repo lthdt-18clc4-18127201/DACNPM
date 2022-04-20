@@ -1,18 +1,13 @@
-import React, { useState, useContext } from "react";
+import React, { useState} from "react";
 import { Table, Button, Drawer,Space, Modal ,Descriptions,Badge} from "antd";
 
-import UserContext from "../../../../store/adminstore"
-const DescriptionItem = ({ title, content }) => (
-  <div className="site-description-item-profile-wrapper">
-    <p className="site-description-item-profile-p-label">{title}:</p>
-    {content}
-  </div>
-);
+
+
 
 export default function SellerView() {
-  const { store } = useContext(UserContext);
-  const { items, query } = store;
-  const [state, setState] = useState({
+ 
+
+  const [state] = useState({
     user: {},
     iddelete:null
   });
@@ -74,12 +69,12 @@ export default function SellerView() {
     {
       title: "Hành động",
       key: "action",
-      render: (text, record) => (
+      render: () => (
         <Space size="middle">
          <Button type="primary" shape="round" size={"small"} onClick={showDrawer}>
           Xem thông tin
         </Button>
-        <Button type="danger" shape="round" size={"small"} onClick={showDrawer}>
+        <Button type="danger" shape="round" size={"small"} onClick={showBlockModal}>
           Xác nhận
         </Button>
         <Button type="danger" shape="round" size={"small"} onClick={showDrawer}>
@@ -130,7 +125,7 @@ export default function SellerView() {
         visible={visibleBlockModal}
         onCancel={onCloseBlockModal}
       >
-        {"Xác nhận khóa tài khoản này"}
+        {"Xác nhận tài khoản này thành người bán"}
       </Modal>
     </>
   );

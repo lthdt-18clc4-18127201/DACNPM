@@ -24,13 +24,13 @@ export default function AdminLoginPage() {
   const { adminInfo } = adminSignin;
   
   const dispatch = useDispatch();
-  const onFinish = async (e) => {
+  const onFinish = (e) => {
     
  
     
     dispatch(signin(e.email, e.password));
     if(adminInfo) {
-      const retUrl = location.state?.from?.pathname || "/dashboard/users";
+      const retUrl = location.state.from.pathname || "/dashboard/users";
           navigate(retUrl);
     }
     

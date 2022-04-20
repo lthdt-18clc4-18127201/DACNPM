@@ -1,6 +1,6 @@
 import React from 'react';
 import { SaleWidgetWrapper } from './SaleWidget.styles';
-
+/* eslint-disable react/prop-types */
 export default function SaleWidget({ fontColor, label, price, details }) {
   const textColor = {
     color: fontColor,

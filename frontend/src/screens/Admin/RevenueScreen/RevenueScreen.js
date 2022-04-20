@@ -1,23 +1,21 @@
 import React from "react";
-import { Layout, Menu, Breadcrumb, Row, Col } from "antd";
+import {  Row, Col } from "antd";
 import "antd/dist/antd.min.css";
 import {
-  DesktopOutlined,
+
   ShoppingCartOutlined,
   UserAddOutlined,
   MoneyCollectOutlined,
   UserOutlined,
 } from "@ant-design/icons";
-import AcceptTable from "../../../components/Admin/Table/AcceptTable";
-import ReportsTable from "../../../components/Admin/Table/ReportTable";
+
 import StickerWidget from "../../../components/Admin/Widget/Sticker/StickerWidget";
 import IsoWidgetsWrapper from "../../../components/Admin/Widget/WidgetWrapper";
-import SaleWidget from "../../../components/Admin/Widget/Sale/SaleWidget";
+
 import IsoWidgetBox from "../../../components/Admin/Widget/WidgetBox";
 import GoogleChart from "react-google-charts";
 import * as googleChartConfigs from "./config";
-const { Header, Content, Footer, Sider } = Layout;
-const { SubMenu } = Menu;
+
 const rowStyle = {
   width: "100%",
   display: "flex",
@@ -27,7 +25,7 @@ const colStyle = {
   marginBottom: "16px",
   padding: "20px",
 };
-const gutter = 16;
+
 
 export default function RevenueScreen() {
   return (
