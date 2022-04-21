@@ -16,7 +16,9 @@ const { Header, Footer, Sider, Content } = Layout;
 export default function Admin() {
   const navigate = useNavigate();
 
+
   
+
   return (
  
       <Layout className="" style={{ height: "100vh" }}>

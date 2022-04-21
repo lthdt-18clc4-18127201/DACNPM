@@ -97,7 +97,7 @@ export default function UserView() {
             <Badge status="processing" text="Activate" />
           </Descriptions.Item>
           <Descriptions.Item label="Type User">
-            
+
           </Descriptions.Item>
         
           <Descriptions.Item label="Config Info">
