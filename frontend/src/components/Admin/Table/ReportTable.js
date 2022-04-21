@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import { Table, Tag, Space, Drawer, Button } from "antd";
+import { Table, Space, Drawer, Button } from "antd";
 import CustomerDescription from "../CustomerDescription/CustomerDescription";
 import PageHeader from "../PageHeader/PageHeader";
 
 export default function ReportsTable() {
-  const data = [{
+   let data = [{
     key: "1",
     name: "John Brown",
     report: "Pham meme kha dc",
@@ -22,6 +22,7 @@ export default function ReportsTable() {
     name: "Joe Black",
     report: "Pham meme kha dc",
   }];
+  
   const columns = [
     {
       title: "Tên",
@@ -39,7 +40,7 @@ export default function ReportsTable() {
     {
       title: "Hành động",
       key: "action",
-      render: (text, record) => (
+      render: () => (
         <Space size="middle">
           <Button
             type="primary"

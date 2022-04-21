@@ -14,7 +14,6 @@ import OrderScreen from "./screens/OrderScreen";
 import OrderDetailsScreen from "./screens/OrderDetailsScreen";
 import Admin from "./screens/Admin/Admin";
 import AdminLoginPage from "./screens/Admin/LoginAdminScreen/LoginAdminScreen";
-
 function App() {
   return (
     <>
@@ -23,7 +22,7 @@ function App() {
         <Route path="/*" element={<UserApp />} />
         {/*------------------------------Admin----------------------------------*/}
         <Route path="/dashboard/login" element={<AdminLoginPage/>}></Route>
-        <Route path="/dashboard/*" element={<Admin />} />
+        <Route path="/dashboard/*" element={<RequireAuth><Admin /></RequireAuth>} />
       </Routes>
     </>
   );
@@ -98,15 +97,7 @@ function UserApp() {
     </div>
   );
 }
-function AdminApp() {
-  return (
-    <>
-      <Routes>
-        <Route path="/*" element={<Admin />} />
-      </Routes>
-    </>
-  );
-}
+
 function RequireAuth({ children }) {
   let location = useLocation();
 
