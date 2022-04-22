@@ -1,9 +1,7 @@
 import React  from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import {
-  Layout,
- 
-  Row,
+  Layout,  Row,
   Col,
   Form,
   Input,
@@ -25,12 +23,9 @@ export default function AdminLoginPage() {
   
   const dispatch = useDispatch();
   const onFinish = (e) => {
-    
- 
-    
     dispatch(signin(e.email, e.password));
     if(adminInfo) {
-      const retUrl = location.state.from.pathname || "/dashboard/users";
+      const retUrl = location.state?.from?.pathname || "/dashboard/users";
           navigate(retUrl);
     }
     
@@ -78,9 +73,6 @@ export default function AdminLoginPage() {
             >
               <Input.Password />
             </Form.Item>
-
-            
-
             <Form.Item wrapperCol={{ offset: 12, span: 12 }}>
               <Button type="primary" htmlType="submit">
                 Log In

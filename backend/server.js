@@ -14,9 +14,9 @@ app.use(express.json());
 app.use(express.urlencoded({
     extended: true,
 }));
+
 dotenv.config();
 db.connect();
-
 route(app);
 
 app.listen(port, () => {

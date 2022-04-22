@@ -28,8 +28,9 @@ userRouter.post(
                     token: generateToken(user)
                 })
             }
+        } else {
+            res.status(401).send({ message: 'Invaild email or password'});
         }
-        res.status(401).send({ message: 'Invaild email or password'});
     })
 );
 
