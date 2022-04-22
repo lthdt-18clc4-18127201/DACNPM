@@ -63,18 +63,14 @@ export const listUser = () => async (dispatch) => {
         })
     }
 }
-export const createUser = (user) => async(dispatch, getState) => {
+export const createUser = (user) => async(dispatch) => {
     dispatch({
         type: CREATE_USER_REQUEST,
         payload: user,
     })
     try {
-        const {userSignin: {userInfo}} = getState();
-        const {data} = await Axios.post('/api/users/create', user, {
-            headers: {
-                Authorization: `Bearer ${userInfo.token}`
-            }
-        })
+    
+        const {data} = await Axios.post('/api/users/create', user);
         dispatch({
             type: CREATE_USER_SUCCESS,
             payload: data.user,

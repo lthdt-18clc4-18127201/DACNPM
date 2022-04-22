@@ -30,6 +30,7 @@ export default function UserView() {
     setVisible(false);
   };
   const columns = [
+    
     {
       title: "Username",
       dataIndex: "username",
@@ -51,7 +52,7 @@ export default function UserView() {
           {record.name !== "initial" && (
             <>
               <Button
-                key={`a-${record.name}`}
+           
                 type="primary"
                 shape="round"
                 style={{ marginRight: "10px", border: "none" }}
@@ -62,7 +63,7 @@ export default function UserView() {
                 Chi tiết
               </Button>
               <Button
-                key={`a-${record.name}`}
+            
                 type="primary"
                 shape="round"
                 style={{ marginRight: "10px", border: "none" }}
@@ -81,7 +82,7 @@ export default function UserView() {
   ];
   return (
     <>
-      <Table dataSource={users} columns={columns} pagination={{ defaultPageSize: 2, showSizeChanger: true}} />
+      <Table dataSource={users} rowKey="_id" columns={columns} pagination={{ defaultPageSize: 4, showSizeChanger: true}} />
       <Drawer
         title="Thông tin khách hàng"
         placement="right"

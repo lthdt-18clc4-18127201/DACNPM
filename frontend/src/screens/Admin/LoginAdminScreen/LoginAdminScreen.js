@@ -30,7 +30,7 @@ export default function AdminLoginPage() {
     
     dispatch(signin(e.email, e.password));
     if(adminInfo) {
-      const retUrl = location.state.from.pathname || "/dashboard/users";
+      const retUrl = location.state?.from?.pathname || "/dashboard/users";
           navigate(retUrl);
     }
     
