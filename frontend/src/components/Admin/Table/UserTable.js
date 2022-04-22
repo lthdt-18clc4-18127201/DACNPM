@@ -7,6 +7,7 @@ import PageHeader from "../PageHeader/PageHeader";
 
 import { useDispatch, useSelector } from "react-redux";
 import { createUser, listUser  } from "../../../actions/adminActions";
+import UserBlockView from "./UserView/UserBlockView";
 
 const { TabPane } = Tabs;
 const { Option } = Select;
@@ -28,10 +29,10 @@ export default function UserTable() {
   };
   const onFinish = (e) => {
     const user = {
-      name: e.username,
+      username: e.username,
       email: e.email,
       password: e.password,
-      isAdmin: e.isAdmin,
+     
     };
     dispatch(createUser(user));
   };
@@ -179,7 +180,7 @@ export default function UserTable() {
           <UserView />
         </TabPane>
         <TabPane tab="Người dùng bị khóa" key="2">
-          
+          <UserBlockView></UserBlockView>
         </TabPane>
       </Tabs>
     </>
