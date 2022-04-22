@@ -75,8 +75,6 @@ export const createUser = (user) => async(dispatch) => {
             type: CREATE_USER_SUCCESS,
             payload: data.user,
         })
-        
-        
     } catch (error) {
         dispatch({
             type: CREATE_USER_FAIL,

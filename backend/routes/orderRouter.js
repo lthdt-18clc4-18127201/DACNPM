@@ -22,24 +22,11 @@ orderRouter.post(
     })
 );
 
-orderRouter.get(
-    '/:id',
-    isAuth,
-    expressAsyncHandler(async(req, res) => {
-        const order = await orderRepo.findById(req.params.id);
-        if(order) {
-            res.send(order);
-        } else {
-            res.status(404).send({message: 'Order Not Found'});
-        }
-    })
-)
-
 orderRouter.put(
     '/:id/pay',
     isAuth,
     expressAsyncHandler(async(req, res) => {
-        const order = orderRepo.findById(req.params.id);
+        const order = await orderRepo.findById(req.params.id);
         if(order) {
             order.isPaid = true;
             order.paidAt = Date.now();
@@ -56,5 +43,19 @@ orderRouter.put(
         }
     })
 )
+
+orderRouter.get(
+    '/:id',
+    isAuth,
+    expressAsyncHandler(async(req, res) => {
+        const order = await orderRepo.findById(req.params.id);
+        if(order) {
+            res.send(order);
+        } else {
+            res.status(404).send({message: 'Order Not Found'});
+        }
+    })
+)
+
 
 export default orderRouter;

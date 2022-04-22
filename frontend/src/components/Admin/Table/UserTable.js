@@ -15,9 +15,6 @@ export default function UserTable() {
   const userCreate = useSelector((state) => state.userCreate);
   const { success } = userCreate;
   const [isModalVisible, setIsModalVisible] = useState(false);
-  // const [ email ] = useState('');
-  // const [ password ] = useState('');
-  // const [ confirmPassword ] = useState('');
   const showModal = () => {
     setIsModalVisible(true);
   };
@@ -158,7 +155,6 @@ export default function UserTable() {
           >
             <Select placeholder="select role">
               <Option value={true}>Admin</Option>
-              <Option value={false}>User</Option>
             </Select>
           </Form.Item>
 
