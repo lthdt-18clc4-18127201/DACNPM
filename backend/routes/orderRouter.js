@@ -1,6 +1,5 @@
 import express from "express";
 import expressAsyncHandler from "express-async-handler";
-import Order from "../models/Order.js";
 import { isAuth } from "../utils.js";
 import orderService from "../services/orderServices.js";
 import orderRepo from "../repositories/orderRepo.js";

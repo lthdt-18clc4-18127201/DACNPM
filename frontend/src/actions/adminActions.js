@@ -70,7 +70,7 @@ export const createUser = (user) => async(dispatch) => {
     })
     try {
     
-        const {data} = await Axios.post('/api/users/create', user);
+        const {data} = await Axios.post('/api/admin/users/create', user);
         dispatch({
             type: CREATE_USER_SUCCESS,
             payload: data.user,

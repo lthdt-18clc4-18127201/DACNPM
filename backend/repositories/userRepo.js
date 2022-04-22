@@ -17,6 +17,11 @@ async function register(body) {
         email: body.email,
         password: bcrypt.hashSync(body.password, 8),
     });
+    if (body.role === true) {
+        user.isAdmin = true;
+    } else {
+        return await user.save();
+    }
     return await user.save();
 }
 

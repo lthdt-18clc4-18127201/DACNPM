@@ -1,5 +1,4 @@
 import React,{ useEffect, useState }  from "react";
-
 import { Tabs, Button, Modal, Form, Input,Select } from "antd";
 import UserView from "./UserView/UserView";
 
@@ -14,15 +13,14 @@ const { Option } = Select;
 export default function UserTable() {
   const dispatch = useDispatch();
   const userCreate = useSelector((state) => state.userCreate);
-  // const usersList =useSelector((state) => state.usersList);
-  // const { users } = usersList;
   const { success } = userCreate;
   const [isModalVisible, setIsModalVisible] = useState(false);
+  // const [ email ] = useState('');
+  // const [ password ] = useState('');
+  // const [ confirmPassword ] = useState('');
   const showModal = () => {
     setIsModalVisible(true);
   };
-
-  
 
   const handleCancel = () => {
     setIsModalVisible(false);
@@ -32,7 +30,7 @@ export default function UserTable() {
       username: e.username,
       email: e.email,
       password: e.password,
-     
+      role: e.role,
     };
     dispatch(createUser(user));
   };
@@ -45,7 +43,8 @@ export default function UserTable() {
       setIsModalVisible(false);
       dispatch(listUser())
     }
-  }, []);
+  }, [dispatch]);
+
   return (
     <>
       <PageHeader title={"Quản lý người dùng"}></PageHeader>
@@ -122,8 +121,8 @@ export default function UserTable() {
             <Input.Password />
           </Form.Item>
           <Form.Item
-            name="confirm"
             label="Nhập lại"
+            name="confirm"
             dependencies={["password"]}
             hasFeedback
             rules={[
@@ -153,11 +152,11 @@ export default function UserTable() {
             rules={[
               {
                 required: true,
-                message: "Please select admin!",
+                message: "Please select role!",
               },
             ]}
           >
-            <Select placeholder="select your gender">
+            <Select placeholder="select role">
               <Option value={true}>Admin</Option>
               <Option value={false}>User</Option>
             </Select>

@@ -61,7 +61,7 @@ export default function AdminLoginPage() {
                
               ]}
             >
-              <Input />
+            <Input />
             </Form.Item>
 
             <Form.Item
